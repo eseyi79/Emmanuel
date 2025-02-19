@@ -1,0 +1,13 @@
+#write a function for calculating the hamming distance between your Slack username and twitter/X handle (synthesize if you don’t have one). Feel free to pad it with extra words if they are not of the same length.#
+def hamming_distance(str1, str2):
+
+    distance = sum(c1 != c2 for c1, c2 in zip(str1, str2))  
+ 
+    return distance
+
+# Example usage
+str1 = "eseyi79"
+str2 = "nemma80"
+
+distance = hamming_distance(str1, str2)
+print(f"Hamming distance between '{str1}' and '{str2}' is: {distance}")
