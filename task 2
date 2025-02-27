@@ -1,0 +1,33 @@
+# Convert to DataFrame
+time_df = pd.DataFrame({
+    'Strain': np.tile(strains, 2),
+    'Condition': ['-']*len(times_ko) + ['+']*len(times_ki),
+    'Time to Carrying Capacity': times_ko + times_ki
+})
+
+# Scatter plot
+plt.figure(figsize=(8,6))
+sns.scatterplot(data=time_df, x='Condition', y='Time to Carrying Capacity', hue='Strain')
+plt.title("Scatter Plot of Time to Reach Carrying Capacity")
+plt.xlabel("Condition (- for Knock-out, + for Knock-in)")
+plt.ylabel("Time to Carrying Capacity (hours)")
+plt.show()
+
+# Box plot
+plt.figure(figsize=(8,6))
+sns.boxplot(data=time_df, x='Condition', y='Time to Carrying Capacity')
+plt.title("Box Plot of Time to Reach Carrying Capacity")
+plt.xlabel("Condition (- for Knock-out, + for Knock-in)")
+plt.ylabel("Time to Carrying Capacity (hours)")
+plt.show()
+
+# Statistical Test
+# T Test
+t_stat, p_value = ttest_ind(times_ko, times_ki)
+print(f"T-test statistic: {t_stat:.3f}, P-value: {p_value:.3f}")
+
+# Observations
+# - The growth curves show distinct trends for knock-out and knock-in strains.
+# - Scatter and box plots highlight the variability in time to carrying capacity across strains.
+# - If p-value < 0.05, it indicates a statistically significant difference between knock-out and knock-in strains.
+# - If p-value > 0.05, it suggests no significant difference in their growth dynamics.
